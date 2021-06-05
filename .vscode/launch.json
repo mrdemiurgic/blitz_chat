@@ -1,0 +1,40 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "iPhone 8",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "36274e29dfb257b187bd1e68ebb5340e03901282"
+    },
+    {
+      "name": "Pixel 4a 5G",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "0A271JECB05956"
+    },
+    {
+      "name": "Chrome",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "chrome"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Mobile",
+      "configurations": ["iPhone 8", "Pixel 4a 5G"]
+    },
+    {
+      "name": "Pixel 4a 5G & Chrome",
+      "configurations": ["Chrome", "Pixel 4a 5G"]
+    },
+    {
+      "name": "All",
+      "configurations": ["iPhone 8", "Pixel 4a 5G", "Chrome"]
+    }
+  ]
+}
