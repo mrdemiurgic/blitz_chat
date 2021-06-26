@@ -68,10 +68,6 @@ class SignalerSocketIO {
     });
   }
 
-  void sendReadySignal() {
-    _socket.emit("ready");
-  }
-
   void sendIceCandidate(OutgoingIceCandidate iceCandidate) {
     _socket.emit("iceCandidate", iceCandidate.toJson());
   }

@@ -77,37 +77,36 @@ class RemoteVideosBloc
       print('remote videos signaler event: $event');
       event.maybeWhen(
           welcome: (name, peersList, iceConfig) async {
+            peers.disposeAllPeers();
             if (peersList.length > 0 && iceConfig != null) {
               final localStreamState = localVideoBloc.state;
-              print(localStreamState);
               if (localStreamState is StreamOpen) {
-                await peers.createPeers(
+                final offers = await peers.createPeers(
                     ids: peersList,
                     iceConfig: iceConfig,
                     localStream: localStreamState.localStream);
-                signaler.sendReadySignal();
+                offers.forEach((offer) {
+                  signaler.sendSDP(OutgoingSDP(to: offer.id, sdp: offer.sdp));
+                });
+                // signaler.sendReadySignal();
+                // send SDP offers here
               } else {
                 // save iceConfig and ids to local state awaiting localStream to be ready
               }
             }
           },
-          newPeer: (iceConfig, id) async {
-            final localStreamState = localVideoBloc.state;
-            if (localStreamState is StreamOpen) {
-              await peers.createPeer(
-                  id: id,
-                  iceConfig: iceConfig,
-                  localStream: localStreamState.localStream);
-              final offer = await peers.createOffer(id: id);
-              if (offer != null) {
-                signaler.sendSDP(OutgoingSDP(to: id, sdp: offer));
+          incomingSDP: (sdp, from, iceConfig) async {
+            if (sdp.type == 'offer' && iceConfig != null) {
+              final localStreamState = localVideoBloc.state;
+              if (localStreamState is StreamOpen) {
+                final answer = await peers.createPeerWithOffer(
+                    offer: Offer(id: from, sdp: sdp),
+                    iceConfig: iceConfig,
+                    localStream: localStreamState.localStream);
+                signaler.sendSDP(OutgoingSDP(to: answer.id, sdp: answer.sdp));
               }
-            }
-          },
-          incomingSDP: (sdp, from) async {
-            final answer = await peers.addRemoteSDP(id: from, sdp: sdp);
-            if (answer != null) {
-              signaler.sendSDP(OutgoingSDP(to: from, sdp: answer));
+            } else {
+              await peers.addRemoteSDP(id: from, sdp: sdp);
             }
           },
           incomingIceCandidate: (iceCandidate, from) {

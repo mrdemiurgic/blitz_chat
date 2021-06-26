@@ -8,18 +8,21 @@
       "name": "iPhone 8",
       "request": "launch",
       "type": "dart",
+      "flutterMode": "debug",
       "deviceId": "36274e29dfb257b187bd1e68ebb5340e03901282"
     },
     {
       "name": "Pixel 4a 5G",
       "request": "launch",
       "type": "dart",
-      "deviceId": "0A271JECB05956"
+      "deviceId": "0A271JECB05956",
+      "flutterMode": "debug"
     },
     {
       "name": "Chrome",
       "request": "launch",
       "type": "dart",
+      "flutterMode": "debug",
       "deviceId": "chrome"
     }
   ],

@@ -8,8 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:blitz_chat/router/router.dart';
 import '../theme.dart';
 
-// const SIGNALER_URL = "http://192.168.50.202:3003";
-const SIGNALER_URL = "https://signaler.blitz.chat";
+const SIGNALER_URL = "http://192.168.50.202:3003";
+// const SIGNALER_URL = "https://signaler.blitz.chat";
 
 class App extends StatefulWidget {
   @override
@@ -20,13 +20,19 @@ class _AppState extends State<App> {
   late final SignalerRepository _signaler;
   late final BlitzChatRouterInformationParser _routeInformationParser;
   late final BlitzChatRouterDelegate _routerDelegate;
+  late final LocalVideoBloc _localVideoBloc;
+  late final RoomNameCubit _roomNameCubit;
 
   @override
   void initState() {
     super.initState();
     _signaler = SignalerRepository(SIGNALER_URL);
+    _roomNameCubit = RoomNameCubit();
+    _localVideoBloc =
+        LocalVideoBloc(signaler: _signaler, roomNameCubit: _roomNameCubit);
     _routeInformationParser = BlitzChatRouterInformationParser();
-    _routerDelegate = BlitzChatRouterDelegate(signaler: _signaler);
+    _routerDelegate = BlitzChatRouterDelegate(
+        signaler: _signaler, localVideoBloc: _localVideoBloc);
   }
 
   @override
@@ -38,8 +44,8 @@ class _AppState extends State<App> {
         ],
         child: MultiBlocProvider(
             providers: [
-              BlocProvider(lazy: true, create: (_) => RoomNameCubit()),
-              BlocProvider(lazy: true, create: (_) => LocalVideoBloc()),
+              BlocProvider.value(value: _roomNameCubit),
+              BlocProvider.value(value: _localVideoBloc),
               BlocProvider(
                   lazy: false,
                   create: (BuildContext context) => RemoteVideosBloc(

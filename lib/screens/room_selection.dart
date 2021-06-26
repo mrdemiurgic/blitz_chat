@@ -1,6 +1,5 @@
 import 'package:blitz_chat/blocs/local_video/local_video.dart';
 import 'package:blitz_chat/blocs/room_name/room_name.dart';
-import 'package:blitz_chat/repositories/signaler/signaler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,9 +8,7 @@ import '../widgets/room_name_field.dart';
 class RoomSelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final signaler = RepositoryProvider.of<SignalerRepository>(context);
-
-    return BlocConsumer<LocalVideoBloc, LocalVideoState>(
+    return BlocBuilder<LocalVideoBloc, LocalVideoState>(
         builder: (BuildContext context, LocalVideoState state) {
       final localVideoBloc = BlocProvider.of<LocalVideoBloc>(context);
       final roomNameCubit = BlocProvider.of<RoomNameCubit>(context);
@@ -25,22 +22,12 @@ class RoomSelectionScreen extends StatelessWidget {
             label: Text("Enter Room"),
             onPressed: () {
               if (roomNameCubit.state == '') {
-                roomNameCubit.newText('default');
+                roomNameCubit.setName('default');
                 // open bottom sheet pointing to fact that room name is unset and offer to generate name
               }
-
-              if (localVideoBloc.state is StreamOpen) {
-                signaler.join(roomName: roomNameCubit.state);
-              } else {
-                localVideoBloc.add(Open());
-              }
+              localVideoBloc.add(Open(roomName: roomNameCubit.state));
             }),
       );
-    }, listener: (context, state) {
-      final roomNameCubit = BlocProvider.of<RoomNameCubit>(context);
-      if (state is StreamOpen) {
-        signaler.join(roomName: roomNameCubit.state);
-      }
     });
   }
 }

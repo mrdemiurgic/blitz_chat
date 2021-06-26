@@ -42,7 +42,8 @@ class SignalerEvent with _$SignalerEvent {
 
   const factory SignalerEvent.incomingSDP(
       {@SDPConverter() required RTCSessionDescription sdp,
-      required String from}) = IncomingSDP;
+      required String from,
+      Map<String, dynamic>? iceConfig}) = IncomingSDP;
 
   const factory SignalerEvent.outgoingSDP(
       {@SDPConverter() required RTCSessionDescription sdp,

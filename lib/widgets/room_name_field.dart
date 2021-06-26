@@ -30,7 +30,7 @@ class _RoomNameFieldState extends State<RoomNameField> {
     });
 
     _controller.addListener(() {
-      widget.roomNameCubit.newText(_controller.text);
+      widget.roomNameCubit.setName(_controller.text);
       setState(() {
         if (_controller.text.length > 0) {
           setState(() {

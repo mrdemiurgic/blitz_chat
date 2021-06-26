@@ -90,10 +90,6 @@ class SignalerRepository {
     }
   }
 
-  void sendReadySignal() {
-    _signaler.sendReadySignal();
-  }
-
   void sendSDP(OutgoingSDP sdp) {
     _signaler.sendSDP(sdp);
   }

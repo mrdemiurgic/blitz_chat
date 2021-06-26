@@ -19,6 +19,14 @@ class Peer {
     await _peer.addStream(stream);
     _peer.onIceCandidate = _onIceCandidate;
     _peer.onAddStream = _onAddStream;
+
+    _peer.onConnectionState = (RTCPeerConnectionState state) {
+      print('onConnectionState: $state');
+    };
+
+    _peer.onIceConnectionState = (RTCIceConnectionState state) {
+      print('onIceConnectionState: $state');
+    };
   }
 
   bool get isClosed => (_peer.connectionState ==
@@ -40,13 +48,14 @@ class Peer {
     }
   }
 
-  Future<RTCSessionDescription?> createOffer() async {
+  Future<RTCSessionDescription> createOffer() async {
     if (!isClosed) {
       final offer = await _peer.createOffer();
       await _peer.setLocalDescription(offer);
       return offer;
+    } else {
+      throw ("Trying to create an offer with a peer that already closed.");
     }
-    return null;
   }
 
   Future<RTCSessionDescription?> addRemoteSDP(RTCSessionDescription sdp) async {

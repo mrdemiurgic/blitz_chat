@@ -16,8 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$LocalVideoEventTearOff {
   const _$LocalVideoEventTearOff();
 
-  Open open() {
-    return const Open();
+  Open open({required String roomName}) {
+    return Open(
+      roomName: roomName,
+    );
   }
 
   Close close() {
@@ -32,13 +34,13 @@ const $LocalVideoEvent = _$LocalVideoEventTearOff();
 mixin _$LocalVideoEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() open,
+    required TResult Function(String roomName) open,
     required TResult Function() close,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? open,
+    TResult Function(String roomName)? open,
     TResult Function()? close,
     required TResult orElse(),
   }) =>
@@ -79,6 +81,7 @@ class _$LocalVideoEventCopyWithImpl<$Res>
 abstract class $OpenCopyWith<$Res> {
   factory $OpenCopyWith(Open value, $Res Function(Open) then) =
       _$OpenCopyWithImpl<$Res>;
+  $Res call({String roomName});
 }
 
 /// @nodoc
@@ -89,50 +92,77 @@ class _$OpenCopyWithImpl<$Res> extends _$LocalVideoEventCopyWithImpl<$Res>
 
   @override
   Open get _value => super._value as Open;
+
+  @override
+  $Res call({
+    Object? roomName = freezed,
+  }) {
+    return _then(Open(
+      roomName: roomName == freezed
+          ? _value.roomName
+          : roomName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$Open with DiagnosticableTreeMixin implements Open {
-  const _$Open();
+  const _$Open({required this.roomName});
+
+  @override
+  final String roomName;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'LocalVideoEvent.open()';
+    return 'LocalVideoEvent.open(roomName: $roomName)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('type', 'LocalVideoEvent.open'));
+    properties
+      ..add(DiagnosticsProperty('type', 'LocalVideoEvent.open'))
+      ..add(DiagnosticsProperty('roomName', roomName));
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is Open);
+    return identical(this, other) ||
+        (other is Open &&
+            (identical(other.roomName, roomName) ||
+                const DeepCollectionEquality()
+                    .equals(other.roomName, roomName)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(roomName);
+
+  @JsonKey(ignore: true)
+  @override
+  $OpenCopyWith<Open> get copyWith =>
+      _$OpenCopyWithImpl<Open>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() open,
+    required TResult Function(String roomName) open,
     required TResult Function() close,
   }) {
-    return open();
+    return open(roomName);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? open,
+    TResult Function(String roomName)? open,
     TResult Function()? close,
     required TResult orElse(),
   }) {
     if (open != null) {
-      return open();
+      return open(roomName);
     }
     return orElse();
   }
@@ -161,7 +191,11 @@ class _$Open with DiagnosticableTreeMixin implements Open {
 }
 
 abstract class Open implements LocalVideoEvent {
-  const factory Open() = _$Open;
+  const factory Open({required String roomName}) = _$Open;
+
+  String get roomName => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $OpenCopyWith<Open> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -207,7 +241,7 @@ class _$Close with DiagnosticableTreeMixin implements Close {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() open,
+    required TResult Function(String roomName) open,
     required TResult Function() close,
   }) {
     return close();
@@ -216,7 +250,7 @@ class _$Close with DiagnosticableTreeMixin implements Close {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? open,
+    TResult Function(String roomName)? open,
     TResult Function()? close,
     required TResult orElse(),
   }) {

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:blitz_chat/blocs/local_video/local_video.dart';
 import 'package:blitz_chat/repositories/signaler/signaler.dart';
 import 'package:blitz_chat/screens/room_selection.dart';
 import 'package:blitz_chat/screens/splash.dart';
@@ -16,9 +17,10 @@ class BlitzChatRouterDelegate extends RouterDelegate<AppState>
   late final StreamSubscription _signalerSub;
 
   final SignalerRepository signaler;
-  BlitzChatRouterDelegate({required this.signaler}) : super() {
-    print('router delegate set up signaler listener $_appState');
-
+  final LocalVideoBloc localVideoBloc;
+  BlitzChatRouterDelegate(
+      {required this.signaler, required this.localVideoBloc})
+      : super() {
     _signalerSub = signaler.stream.listen((SignalerEvent event) {
       event.maybeWhen(
           connected: () {
@@ -50,18 +52,18 @@ class BlitzChatRouterDelegate extends RouterDelegate<AppState>
 
   @override
   void dispose() {
-    super.dispose();
     _signalerSub.cancel();
+    super.dispose();
   }
 
   @override
   Future<void> setNewRoutePath(AppState state) async {
     state.maybeWhen(
         inRoom: (roomName) {
-          signaler.join(roomName: roomName);
+          localVideoBloc.add(Open(roomName: roomName));
         },
         outRoom: (_) {
-          signaler.leave();
+          localVideoBloc.add(Close());
         },
         orElse: () {});
   }
@@ -72,7 +74,7 @@ class BlitzChatRouterDelegate extends RouterDelegate<AppState>
       key: navigatorKey,
       pages: _pagesBuilder(_appState),
       onPopPage: (route, result) {
-        signaler.leave();
+        localVideoBloc.add(Close());
         return false;
       },
     );

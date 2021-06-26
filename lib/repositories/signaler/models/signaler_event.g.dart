@@ -127,6 +127,7 @@ _$IncomingSDP _$_$IncomingSDPFromJson(Map<String, dynamic> json) {
   return _$IncomingSDP(
     sdp: const SDPConverter().fromJson(json['sdp'] as Map<String, dynamic>),
     from: json['from'] as String,
+    iceConfig: json['iceConfig'] as Map<String, dynamic>?,
   );
 }
 
@@ -134,6 +135,7 @@ Map<String, dynamic> _$_$IncomingSDPToJson(_$IncomingSDP instance) =>
     <String, dynamic>{
       'sdp': const SDPConverter().toJson(instance.sdp),
       'from': instance.from,
+      'iceConfig': instance.iceConfig,
     };
 
 _$OutgoingSDP _$_$OutgoingSDPFromJson(Map<String, dynamic> json) {

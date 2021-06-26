@@ -123,10 +123,12 @@ class _$SignalerEventTearOff {
 
   IncomingSDP incomingSDP(
       {@SDPConverter() required RTCSessionDescription sdp,
-      required String from}) {
+      required String from,
+      Map<String, dynamic>? iceConfig}) {
     return IncomingSDP(
       sdp: sdp,
       from: from,
+      iceConfig: iceConfig,
     );
   }
 
@@ -169,8 +171,8 @@ mixin _$SignalerEvent {
     required TResult Function(
             @CandidateConverter() RTCIceCandidate iceCandidate, String to)
         outgoingIceCandidate,
-    required TResult Function(
-            @SDPConverter() RTCSessionDescription sdp, String from)
+    required TResult Function(@SDPConverter() RTCSessionDescription sdp,
+            String from, Map<String, dynamic>? iceConfig)
         incomingSDP,
     required TResult Function(
             @SDPConverter() RTCSessionDescription sdp, String to)
@@ -196,7 +198,8 @@ mixin _$SignalerEvent {
     TResult Function(
             @CandidateConverter() RTCIceCandidate iceCandidate, String to)?
         outgoingIceCandidate,
-    TResult Function(@SDPConverter() RTCSessionDescription sdp, String from)?
+    TResult Function(@SDPConverter() RTCSessionDescription sdp, String from,
+            Map<String, dynamic>? iceConfig)?
         incomingSDP,
     TResult Function(@SDPConverter() RTCSessionDescription sdp, String to)?
         outgoingSDP,
@@ -318,8 +321,8 @@ class _$Disconnected implements Disconnected {
     required TResult Function(
             @CandidateConverter() RTCIceCandidate iceCandidate, String to)
         outgoingIceCandidate,
-    required TResult Function(
-            @SDPConverter() RTCSessionDescription sdp, String from)
+    required TResult Function(@SDPConverter() RTCSessionDescription sdp,
+            String from, Map<String, dynamic>? iceConfig)
         incomingSDP,
     required TResult Function(
             @SDPConverter() RTCSessionDescription sdp, String to)
@@ -348,7 +351,8 @@ class _$Disconnected implements Disconnected {
     TResult Function(
             @CandidateConverter() RTCIceCandidate iceCandidate, String to)?
         outgoingIceCandidate,
-    TResult Function(@SDPConverter() RTCSessionDescription sdp, String from)?
+    TResult Function(@SDPConverter() RTCSessionDescription sdp, String from,
+            Map<String, dynamic>? iceConfig)?
         incomingSDP,
     TResult Function(@SDPConverter() RTCSessionDescription sdp, String to)?
         outgoingSDP,
@@ -476,8 +480,8 @@ class _$Connecting implements Connecting {
     required TResult Function(
             @CandidateConverter() RTCIceCandidate iceCandidate, String to)
         outgoingIceCandidate,
-    required TResult Function(
-            @SDPConverter() RTCSessionDescription sdp, String from)
+    required TResult Function(@SDPConverter() RTCSessionDescription sdp,
+            String from, Map<String, dynamic>? iceConfig)
         incomingSDP,
     required TResult Function(
             @SDPConverter() RTCSessionDescription sdp, String to)
@@ -506,7 +510,8 @@ class _$Connecting implements Connecting {
     TResult Function(
             @CandidateConverter() RTCIceCandidate iceCandidate, String to)?
         outgoingIceCandidate,
-    TResult Function(@SDPConverter() RTCSessionDescription sdp, String from)?
+    TResult Function(@SDPConverter() RTCSessionDescription sdp, String from,
+            Map<String, dynamic>? iceConfig)?
         incomingSDP,
     TResult Function(@SDPConverter() RTCSessionDescription sdp, String to)?
         outgoingSDP,
@@ -633,8 +638,8 @@ class _$Connected implements Connected {
     required TResult Function(
             @CandidateConverter() RTCIceCandidate iceCandidate, String to)
         outgoingIceCandidate,
-    required TResult Function(
-            @SDPConverter() RTCSessionDescription sdp, String from)
+    required TResult Function(@SDPConverter() RTCSessionDescription sdp,
+            String from, Map<String, dynamic>? iceConfig)
         incomingSDP,
     required TResult Function(
             @SDPConverter() RTCSessionDescription sdp, String to)
@@ -663,7 +668,8 @@ class _$Connected implements Connected {
     TResult Function(
             @CandidateConverter() RTCIceCandidate iceCandidate, String to)?
         outgoingIceCandidate,
-    TResult Function(@SDPConverter() RTCSessionDescription sdp, String from)?
+    TResult Function(@SDPConverter() RTCSessionDescription sdp, String from,
+            Map<String, dynamic>? iceConfig)?
         incomingSDP,
     TResult Function(@SDPConverter() RTCSessionDescription sdp, String to)?
         outgoingSDP,
@@ -817,8 +823,8 @@ class _$ConnectionError implements ConnectionError {
     required TResult Function(
             @CandidateConverter() RTCIceCandidate iceCandidate, String to)
         outgoingIceCandidate,
-    required TResult Function(
-            @SDPConverter() RTCSessionDescription sdp, String from)
+    required TResult Function(@SDPConverter() RTCSessionDescription sdp,
+            String from, Map<String, dynamic>? iceConfig)
         incomingSDP,
     required TResult Function(
             @SDPConverter() RTCSessionDescription sdp, String to)
@@ -847,7 +853,8 @@ class _$ConnectionError implements ConnectionError {
     TResult Function(
             @CandidateConverter() RTCIceCandidate iceCandidate, String to)?
         outgoingIceCandidate,
-    TResult Function(@SDPConverter() RTCSessionDescription sdp, String from)?
+    TResult Function(@SDPConverter() RTCSessionDescription sdp, String from,
+            Map<String, dynamic>? iceConfig)?
         incomingSDP,
     TResult Function(@SDPConverter() RTCSessionDescription sdp, String to)?
         outgoingSDP,
@@ -1029,8 +1036,8 @@ class _$Welcome implements Welcome {
     required TResult Function(
             @CandidateConverter() RTCIceCandidate iceCandidate, String to)
         outgoingIceCandidate,
-    required TResult Function(
-            @SDPConverter() RTCSessionDescription sdp, String from)
+    required TResult Function(@SDPConverter() RTCSessionDescription sdp,
+            String from, Map<String, dynamic>? iceConfig)
         incomingSDP,
     required TResult Function(
             @SDPConverter() RTCSessionDescription sdp, String to)
@@ -1059,7 +1066,8 @@ class _$Welcome implements Welcome {
     TResult Function(
             @CandidateConverter() RTCIceCandidate iceCandidate, String to)?
         outgoingIceCandidate,
-    TResult Function(@SDPConverter() RTCSessionDescription sdp, String from)?
+    TResult Function(@SDPConverter() RTCSessionDescription sdp, String from,
+            Map<String, dynamic>? iceConfig)?
         incomingSDP,
     TResult Function(@SDPConverter() RTCSessionDescription sdp, String to)?
         outgoingSDP,
@@ -1193,8 +1201,8 @@ class _$Bye implements Bye {
     required TResult Function(
             @CandidateConverter() RTCIceCandidate iceCandidate, String to)
         outgoingIceCandidate,
-    required TResult Function(
-            @SDPConverter() RTCSessionDescription sdp, String from)
+    required TResult Function(@SDPConverter() RTCSessionDescription sdp,
+            String from, Map<String, dynamic>? iceConfig)
         incomingSDP,
     required TResult Function(
             @SDPConverter() RTCSessionDescription sdp, String to)
@@ -1223,7 +1231,8 @@ class _$Bye implements Bye {
     TResult Function(
             @CandidateConverter() RTCIceCandidate iceCandidate, String to)?
         outgoingIceCandidate,
-    TResult Function(@SDPConverter() RTCSessionDescription sdp, String from)?
+    TResult Function(@SDPConverter() RTCSessionDescription sdp, String from,
+            Map<String, dynamic>? iceConfig)?
         incomingSDP,
     TResult Function(@SDPConverter() RTCSessionDescription sdp, String to)?
         outgoingSDP,
@@ -1374,8 +1383,8 @@ class _$ByePeer implements ByePeer {
     required TResult Function(
             @CandidateConverter() RTCIceCandidate iceCandidate, String to)
         outgoingIceCandidate,
-    required TResult Function(
-            @SDPConverter() RTCSessionDescription sdp, String from)
+    required TResult Function(@SDPConverter() RTCSessionDescription sdp,
+            String from, Map<String, dynamic>? iceConfig)
         incomingSDP,
     required TResult Function(
             @SDPConverter() RTCSessionDescription sdp, String to)
@@ -1404,7 +1413,8 @@ class _$ByePeer implements ByePeer {
     TResult Function(
             @CandidateConverter() RTCIceCandidate iceCandidate, String to)?
         outgoingIceCandidate,
-    TResult Function(@SDPConverter() RTCSessionDescription sdp, String from)?
+    TResult Function(@SDPConverter() RTCSessionDescription sdp, String from,
+            Map<String, dynamic>? iceConfig)?
         incomingSDP,
     TResult Function(@SDPConverter() RTCSessionDescription sdp, String to)?
         outgoingSDP,
@@ -1571,8 +1581,8 @@ class _$NewPeer implements NewPeer {
     required TResult Function(
             @CandidateConverter() RTCIceCandidate iceCandidate, String to)
         outgoingIceCandidate,
-    required TResult Function(
-            @SDPConverter() RTCSessionDescription sdp, String from)
+    required TResult Function(@SDPConverter() RTCSessionDescription sdp,
+            String from, Map<String, dynamic>? iceConfig)
         incomingSDP,
     required TResult Function(
             @SDPConverter() RTCSessionDescription sdp, String to)
@@ -1601,7 +1611,8 @@ class _$NewPeer implements NewPeer {
     TResult Function(
             @CandidateConverter() RTCIceCandidate iceCandidate, String to)?
         outgoingIceCandidate,
-    TResult Function(@SDPConverter() RTCSessionDescription sdp, String from)?
+    TResult Function(@SDPConverter() RTCSessionDescription sdp, String from,
+            Map<String, dynamic>? iceConfig)?
         incomingSDP,
     TResult Function(@SDPConverter() RTCSessionDescription sdp, String to)?
         outgoingSDP,
@@ -1760,8 +1771,8 @@ class _$BlitzError implements BlitzError {
     required TResult Function(
             @CandidateConverter() RTCIceCandidate iceCandidate, String to)
         outgoingIceCandidate,
-    required TResult Function(
-            @SDPConverter() RTCSessionDescription sdp, String from)
+    required TResult Function(@SDPConverter() RTCSessionDescription sdp,
+            String from, Map<String, dynamic>? iceConfig)
         incomingSDP,
     required TResult Function(
             @SDPConverter() RTCSessionDescription sdp, String to)
@@ -1790,7 +1801,8 @@ class _$BlitzError implements BlitzError {
     TResult Function(
             @CandidateConverter() RTCIceCandidate iceCandidate, String to)?
         outgoingIceCandidate,
-    TResult Function(@SDPConverter() RTCSessionDescription sdp, String from)?
+    TResult Function(@SDPConverter() RTCSessionDescription sdp, String from,
+            Map<String, dynamic>? iceConfig)?
         incomingSDP,
     TResult Function(@SDPConverter() RTCSessionDescription sdp, String to)?
         outgoingSDP,
@@ -1965,8 +1977,8 @@ class _$IncomingIceCandidate implements IncomingIceCandidate {
     required TResult Function(
             @CandidateConverter() RTCIceCandidate iceCandidate, String to)
         outgoingIceCandidate,
-    required TResult Function(
-            @SDPConverter() RTCSessionDescription sdp, String from)
+    required TResult Function(@SDPConverter() RTCSessionDescription sdp,
+            String from, Map<String, dynamic>? iceConfig)
         incomingSDP,
     required TResult Function(
             @SDPConverter() RTCSessionDescription sdp, String to)
@@ -1995,7 +2007,8 @@ class _$IncomingIceCandidate implements IncomingIceCandidate {
     TResult Function(
             @CandidateConverter() RTCIceCandidate iceCandidate, String to)?
         outgoingIceCandidate,
-    TResult Function(@SDPConverter() RTCSessionDescription sdp, String from)?
+    TResult Function(@SDPConverter() RTCSessionDescription sdp, String from,
+            Map<String, dynamic>? iceConfig)?
         incomingSDP,
     TResult Function(@SDPConverter() RTCSessionDescription sdp, String to)?
         outgoingSDP,
@@ -2175,8 +2188,8 @@ class _$OutgoingIceCandidate implements OutgoingIceCandidate {
     required TResult Function(
             @CandidateConverter() RTCIceCandidate iceCandidate, String to)
         outgoingIceCandidate,
-    required TResult Function(
-            @SDPConverter() RTCSessionDescription sdp, String from)
+    required TResult Function(@SDPConverter() RTCSessionDescription sdp,
+            String from, Map<String, dynamic>? iceConfig)
         incomingSDP,
     required TResult Function(
             @SDPConverter() RTCSessionDescription sdp, String to)
@@ -2205,7 +2218,8 @@ class _$OutgoingIceCandidate implements OutgoingIceCandidate {
     TResult Function(
             @CandidateConverter() RTCIceCandidate iceCandidate, String to)?
         outgoingIceCandidate,
-    TResult Function(@SDPConverter() RTCSessionDescription sdp, String from)?
+    TResult Function(@SDPConverter() RTCSessionDescription sdp, String from,
+            Map<String, dynamic>? iceConfig)?
         incomingSDP,
     TResult Function(@SDPConverter() RTCSessionDescription sdp, String to)?
         outgoingSDP,
@@ -2289,7 +2303,10 @@ abstract class $IncomingSDPCopyWith<$Res> {
   factory $IncomingSDPCopyWith(
           IncomingSDP value, $Res Function(IncomingSDP) then) =
       _$IncomingSDPCopyWithImpl<$Res>;
-  $Res call({@SDPConverter() RTCSessionDescription sdp, String from});
+  $Res call(
+      {@SDPConverter() RTCSessionDescription sdp,
+      String from,
+      Map<String, dynamic>? iceConfig});
 }
 
 /// @nodoc
@@ -2306,6 +2323,7 @@ class _$IncomingSDPCopyWithImpl<$Res> extends _$SignalerEventCopyWithImpl<$Res>
   $Res call({
     Object? sdp = freezed,
     Object? from = freezed,
+    Object? iceConfig = freezed,
   }) {
     return _then(IncomingSDP(
       sdp: sdp == freezed
@@ -2316,6 +2334,10 @@ class _$IncomingSDPCopyWithImpl<$Res> extends _$SignalerEventCopyWithImpl<$Res>
           ? _value.from
           : from // ignore: cast_nullable_to_non_nullable
               as String,
+      iceConfig: iceConfig == freezed
+          ? _value.iceConfig
+          : iceConfig // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ));
   }
 }
@@ -2323,7 +2345,8 @@ class _$IncomingSDPCopyWithImpl<$Res> extends _$SignalerEventCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$IncomingSDP implements IncomingSDP {
-  const _$IncomingSDP({@SDPConverter() required this.sdp, required this.from});
+  const _$IncomingSDP(
+      {@SDPConverter() required this.sdp, required this.from, this.iceConfig});
 
   factory _$IncomingSDP.fromJson(Map<String, dynamic> json) =>
       _$_$IncomingSDPFromJson(json);
@@ -2333,10 +2356,12 @@ class _$IncomingSDP implements IncomingSDP {
   final RTCSessionDescription sdp;
   @override
   final String from;
+  @override
+  final Map<String, dynamic>? iceConfig;
 
   @override
   String toString() {
-    return 'SignalerEvent.incomingSDP(sdp: $sdp, from: $from)';
+    return 'SignalerEvent.incomingSDP(sdp: $sdp, from: $from, iceConfig: $iceConfig)';
   }
 
   @override
@@ -2346,14 +2371,18 @@ class _$IncomingSDP implements IncomingSDP {
             (identical(other.sdp, sdp) ||
                 const DeepCollectionEquality().equals(other.sdp, sdp)) &&
             (identical(other.from, from) ||
-                const DeepCollectionEquality().equals(other.from, from)));
+                const DeepCollectionEquality().equals(other.from, from)) &&
+            (identical(other.iceConfig, iceConfig) ||
+                const DeepCollectionEquality()
+                    .equals(other.iceConfig, iceConfig)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(sdp) ^
-      const DeepCollectionEquality().hash(from);
+      const DeepCollectionEquality().hash(from) ^
+      const DeepCollectionEquality().hash(iceConfig);
 
   @JsonKey(ignore: true)
   @override
@@ -2381,14 +2410,14 @@ class _$IncomingSDP implements IncomingSDP {
     required TResult Function(
             @CandidateConverter() RTCIceCandidate iceCandidate, String to)
         outgoingIceCandidate,
-    required TResult Function(
-            @SDPConverter() RTCSessionDescription sdp, String from)
+    required TResult Function(@SDPConverter() RTCSessionDescription sdp,
+            String from, Map<String, dynamic>? iceConfig)
         incomingSDP,
     required TResult Function(
             @SDPConverter() RTCSessionDescription sdp, String to)
         outgoingSDP,
   }) {
-    return incomingSDP(sdp, from);
+    return incomingSDP(sdp, from, iceConfig);
   }
 
   @override
@@ -2411,14 +2440,15 @@ class _$IncomingSDP implements IncomingSDP {
     TResult Function(
             @CandidateConverter() RTCIceCandidate iceCandidate, String to)?
         outgoingIceCandidate,
-    TResult Function(@SDPConverter() RTCSessionDescription sdp, String from)?
+    TResult Function(@SDPConverter() RTCSessionDescription sdp, String from,
+            Map<String, dynamic>? iceConfig)?
         incomingSDP,
     TResult Function(@SDPConverter() RTCSessionDescription sdp, String to)?
         outgoingSDP,
     required TResult orElse(),
   }) {
     if (incomingSDP != null) {
-      return incomingSDP(sdp, from);
+      return incomingSDP(sdp, from, iceConfig);
     }
     return orElse();
   }
@@ -2476,7 +2506,8 @@ class _$IncomingSDP implements IncomingSDP {
 abstract class IncomingSDP implements SignalerEvent {
   const factory IncomingSDP(
       {@SDPConverter() required RTCSessionDescription sdp,
-      required String from}) = _$IncomingSDP;
+      required String from,
+      Map<String, dynamic>? iceConfig}) = _$IncomingSDP;
 
   factory IncomingSDP.fromJson(Map<String, dynamic> json) =
       _$IncomingSDP.fromJson;
@@ -2484,6 +2515,7 @@ abstract class IncomingSDP implements SignalerEvent {
   @SDPConverter()
   RTCSessionDescription get sdp => throw _privateConstructorUsedError;
   String get from => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get iceConfig => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $IncomingSDPCopyWith<IncomingSDP> get copyWith =>
       throw _privateConstructorUsedError;
@@ -2586,8 +2618,8 @@ class _$OutgoingSDP implements OutgoingSDP {
     required TResult Function(
             @CandidateConverter() RTCIceCandidate iceCandidate, String to)
         outgoingIceCandidate,
-    required TResult Function(
-            @SDPConverter() RTCSessionDescription sdp, String from)
+    required TResult Function(@SDPConverter() RTCSessionDescription sdp,
+            String from, Map<String, dynamic>? iceConfig)
         incomingSDP,
     required TResult Function(
             @SDPConverter() RTCSessionDescription sdp, String to)
@@ -2616,7 +2648,8 @@ class _$OutgoingSDP implements OutgoingSDP {
     TResult Function(
             @CandidateConverter() RTCIceCandidate iceCandidate, String to)?
         outgoingIceCandidate,
-    TResult Function(@SDPConverter() RTCSessionDescription sdp, String from)?
+    TResult Function(@SDPConverter() RTCSessionDescription sdp, String from,
+            Map<String, dynamic>? iceConfig)?
         incomingSDP,
     TResult Function(@SDPConverter() RTCSessionDescription sdp, String to)?
         outgoingSDP,
