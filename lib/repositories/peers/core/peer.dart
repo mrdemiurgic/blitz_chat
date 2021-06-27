@@ -14,6 +14,8 @@ class Peer {
         _configuration = iceConfig;
 
   Future<void> init(MediaStream stream) async {
+    print("ice configuration: $_configuration");
+
     _peer = await createPeerConnection(_configuration);
     // await addLocalStream(stream);
     await _peer.addStream(stream);

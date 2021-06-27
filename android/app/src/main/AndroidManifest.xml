@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="app.chat.blitz">
+    package="com.example.blitz_chat">
    <application
         android:label="blitz_chat"
         android:icon="@mipmap/ic_launcher">
@@ -40,7 +40,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="http" android:host="blitz.chat" />
-                <data android:scheme="https" android:host="blitz.chat" />
+                <data android:scheme="https" />
             </intent-filter>
 
         </activity>

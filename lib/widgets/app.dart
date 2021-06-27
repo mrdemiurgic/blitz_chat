@@ -8,8 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:blitz_chat/router/router.dart';
 import '../theme.dart';
 
-// const SIGNALER_URL = "http://192.168.50.202:3003";
-const SIGNALER_URL = "https://signaler.blitz.chat";
+const SIGNALER_URL = "http://192.168.50.202:3003";
+// const SIGNALER_URL = "https://signaler.blitz.chat";
 
 class App extends StatefulWidget {
   @override
