@@ -54,6 +54,7 @@ class Peer {
     if (!isClosed) {
       final offer = await _peer.createOffer();
       await _peer.setLocalDescription(offer);
+      print("creating offer: ${offer.sdp}");
       return offer;
     } else {
       throw ("Trying to create an offer with a peer that already closed.");
@@ -61,10 +62,14 @@ class Peer {
   }
 
   Future<RTCSessionDescription?> addRemoteSDP(RTCSessionDescription sdp) async {
+    print("got remote sdp: ${sdp.sdp}");
+
     if (!isClosed) {
       await _peer.setRemoteDescription(sdp);
+
       if (sdp.type == 'offer') {
         final answer = await _peer.createAnswer();
+        print("creating answer: ${answer.sdp}");
         await _peer.setLocalDescription(answer);
         return answer;
       }

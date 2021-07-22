@@ -24,6 +24,13 @@
       "type": "dart",
       "flutterMode": "debug",
       "deviceId": "chrome"
+    },
+    {
+      "name": "Safari",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "deviceId": "safari"
     }
   ],
   "compounds": [

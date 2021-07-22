@@ -8,8 +8,21 @@ class LocalStreamRepository {
         'facingMode': 'user',
       }
     };
+
+    final devices = await navigator.mediaDevices.enumerateDevices();
+
+    print('ENUMERATE DEVICES');
+    print(devices);
+    devices.forEach((device) {
+      print("${device.deviceId} - ${device.kind} - ${device.label}");
+    });
+
     final MediaStream stream =
         await navigator.mediaDevices.getUserMedia(mediaConstraints);
+
+    print("LOCAL MEDIASTREAM");
+    print("${stream.id} - ${stream.active}");
+
     return stream;
   }
 

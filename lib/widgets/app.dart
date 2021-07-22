@@ -1,12 +1,16 @@
 import 'package:blitz_chat/blocs/local_video/local_video.dart';
 import 'package:blitz_chat/blocs/remote_videos/remote_videos.dart';
 import 'package:blitz_chat/blocs/room_name/room_name.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:blitz_chat/repositories/signaler/signaler.dart';
 import 'package:blitz_chat/repositories/peers/peers.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:blitz_chat/router/router.dart';
 import '../theme.dart';
+
+import 'package:uni_links/uni_links.dart';
+import 'dart:io';
 
 // const SIGNALER_URL = "http://192.168.50.202:3003";
 const SIGNALER_URL = "https://signaler.blitz.chat";
@@ -26,6 +30,7 @@ class _AppState extends State<App> {
   @override
   void initState() {
     super.initState();
+
     _signaler = SignalerRepository(SIGNALER_URL);
     _roomNameCubit = RoomNameCubit();
     _localVideoBloc =
@@ -33,6 +38,11 @@ class _AppState extends State<App> {
     _routeInformationParser = BlitzChatRouterInformationParser();
     _routerDelegate = BlitzChatRouterDelegate(
         signaler: _signaler, localVideoBloc: _localVideoBloc);
+
+    // Needed until iOS Universal Linking is supported by Flutter Router
+    if (!kIsWeb && Platform.isIOS) {
+      deepLinkHandler(_routerDelegate);
+    }
   }
 
   @override
@@ -57,5 +67,18 @@ class _AppState extends State<App> {
                 theme: BlitzTheme.lightTheme,
                 routeInformationParser: _routeInformationParser,
                 routerDelegate: _routerDelegate)));
+  }
+
+  Future<void> deepLinkHandler(BlitzChatRouterDelegate routerDelegate) async {
+    try {
+      final initialUri = await getInitialUri();
+      routerDelegate.setDeepLink(initialUri);
+    } catch (e) {
+      print("oops. URI is invalid $e");
+    }
+
+    uriLinkStream.listen((updatedUri) {
+      routerDelegate.setDeepLink(updatedUri);
+    });
   }
 }

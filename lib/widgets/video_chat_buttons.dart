@@ -32,7 +32,6 @@ class VideoChatButtons extends StatelessWidget {
 
   void _showInviteSheet(BuildContext context) {
     showModalBottomSheet(
-        backgroundColor: Colors.pink,
         context: context,
         builder: (context) {
           return InviteSheet();

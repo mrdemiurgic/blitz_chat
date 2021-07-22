@@ -27,6 +27,24 @@
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 
+	<!-- Deep Linking -->
+	<key>FlutterDeepLinkingEnabled</key>
+	<true/>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+		<key>CFBundleTypeRole</key>
+		<string>Editor</string>
+		<key>CFBundleURLName</key>
+		<string>blitz.chat</string>
+		<key>CFBundleURLSchemes</key>
+		<array>
+		<string>https</string>
+		</array>
+		</dict>
+	</array>
+
+
 	<!-- Permissions -->
 	<key>NSCameraUsageDescription</key>
 	<string>$(PRODUCT_NAME) Camera Usage!</string>

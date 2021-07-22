@@ -68,6 +68,16 @@ class BlitzChatRouterDelegate extends RouterDelegate<AppState>
         orElse: () {});
   }
 
+  void setDeepLink(Uri? uri) {
+    final roomName =
+        uri != null && uri.pathSegments.length > 0 ? uri.pathSegments[0] : null;
+    if (roomName != null && roomName.length > 0) {
+      localVideoBloc.add(Open(roomName: roomName));
+    } else {
+      localVideoBloc.add(Close());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Navigator(

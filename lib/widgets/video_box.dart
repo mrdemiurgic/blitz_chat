@@ -41,6 +41,7 @@ class _VideoBoxState extends State<VideoBox> {
   @override
   Widget build(BuildContext context) {
     if (isRendererReady) {
+      print("writing stream to renderer!");
       _renderer.srcObject = widget.mediaStream;
     }
 

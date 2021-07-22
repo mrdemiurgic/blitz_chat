@@ -1,7 +1,6 @@
 import 'package:blitz_chat/blocs/room_name/room_name.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:uuid/uuid.dart';
 
 class RoomNameField extends StatefulWidget {
   final RoomNameCubit roomNameCubit;
@@ -16,7 +15,6 @@ class RoomNameField extends StatefulWidget {
 class _RoomNameFieldState extends State<RoomNameField> {
   final _controller = TextEditingController();
   late final StreamSubscription<String> _subscription;
-  final uuid = Uuid();
   bool _showClearButton = false;
 
   @override
@@ -71,8 +69,7 @@ class _RoomNameFieldState extends State<RoomNameField> {
           controller: _controller),
       ElevatedButton.icon(
           onPressed: () {
-            final newRoomName = uuid.v4();
-            _controller.text = newRoomName;
+            widget.roomNameCubit.generateRandomName();
           },
           style: ButtonStyle(),
           label: Text("Generate"),

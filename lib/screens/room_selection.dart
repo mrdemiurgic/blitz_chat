@@ -1,5 +1,6 @@
 import 'package:blitz_chat/blocs/local_video/local_video.dart';
 import 'package:blitz_chat/blocs/room_name/room_name.dart';
+import 'package:blitz_chat/widgets/no_roomname_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,6 +14,7 @@ class RoomSelectionScreen extends StatelessWidget {
       final localVideoBloc = BlocProvider.of<LocalVideoBloc>(context);
       final roomNameCubit = BlocProvider.of<RoomNameCubit>(context);
       return Scaffold(
+        appBar: AppBar(title: Text("Create Room")),
         body: RoomNameField(roomNameCubit: roomNameCubit),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: FloatingActionButton.extended(
@@ -22,10 +24,10 @@ class RoomSelectionScreen extends StatelessWidget {
             label: Text("Enter Room"),
             onPressed: () {
               if (roomNameCubit.state == '') {
-                roomNameCubit.setName('default');
-                // open bottom sheet pointing to fact that room name is unset and offer to generate name
+                showNoRoomnameDialog(context);
+              } else {
+                localVideoBloc.add(Open(roomName: roomNameCubit.state));
               }
-              localVideoBloc.add(Open(roomName: roomNameCubit.state));
             }),
       );
     });
